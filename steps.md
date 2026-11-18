@@ -17,9 +17,8 @@
 ### 1. Setup
 - [X] `laravel new pixelforge-app --vue --pest` (the official Vue + Inertia + auth starter kit)
 - [X] `composer require laravel/boost --dev && php artisan boost:install`
-- [ ] Add `.ai/guidelines/no-comments.md` with the line "Never write code comments."
-- [ ] Delete the comments already in the starter's files, then make the first commit
-- [ ] Choose the database (MySQL or Postgres); use the same one locally and in production
+- [X] Add `.ai/guidelines/no-comments.md` with the line "Never write code comments."
+- [X] Choose the database (MySQL or Postgres); use the same one locally and in production
 
 ### 2. Pixelforge account
 - [ ] Create 2 API keys: local and deployed
