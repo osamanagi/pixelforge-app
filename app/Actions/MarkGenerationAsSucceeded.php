@@ -12,10 +12,13 @@ final readonly class MarkGenerationAsSucceeded
 {
     public function __construct(private PricingService $pricing) {}
 
+    /**
+     * @param  array<string, mixed>  $remoteGeneration
+     */
     public function handle(Generation $generation, array $remoteGeneration): void
     {
         DB::transaction(function () use ($generation, $remoteGeneration) {
-            $generation = Generation::query()->lockForUpdate()->findOrFail($generation->getKey());
+            $generation = Generation::query()->whereKey($generation->getKey())->lockForUpdate()->firstOrFail();
 
             if ($generation->status->isFinal()) {
                 return;

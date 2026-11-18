@@ -16,6 +16,9 @@ class StoreGenerationRequest extends FormRequest
         ]);
     }
 
+    /**
+     * @return array<string, array<int, mixed>>
+     */
     public function rules(): array
     {
         return [
@@ -36,6 +39,9 @@ class StoreGenerationRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return list<string>
+     */
     public function referenceImages(): array
     {
         return $this->validated('reference_images', []);

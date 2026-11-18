@@ -15,6 +15,9 @@ final readonly class CreateGeneration
 {
     public function __construct(private PricingService $pricing) {}
 
+    /**
+     * @param  list<string>  $referenceImages
+     */
     public function handle(User $user, string $prompt, GenerationSize $size, GenerationQuality $quality, array $referenceImages): Generation
     {
         $generation = $user->generations()->create([

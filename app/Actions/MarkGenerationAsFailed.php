@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 final readonly class MarkGenerationAsFailed
 {
+    /**
+     * @param  array<string, mixed>  $error
+     */
     public function handle(Generation $generation, array $error, ?CarbonInterface $completedAt = null): void
     {
         DB::transaction(function () use ($generation, $error, $completedAt) {
-            $generation = Generation::query()->lockForUpdate()->findOrFail($generation->getKey());
+            $generation = Generation::query()->whereKey($generation->getKey())->lockForUpdate()->firstOrFail();
 
             if ($generation->status->isFinal()) {
                 return;

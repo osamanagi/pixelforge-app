@@ -17,6 +17,9 @@ final readonly class SyncGenerationWithPixelforge
         private MarkGenerationAsFailed $markAsFailed,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $remoteGeneration
+     */
     public function handle(array $remoteGeneration): void
     {
         $generation = $this->findGeneration($remoteGeneration);
@@ -40,6 +43,9 @@ final readonly class SyncGenerationWithPixelforge
         };
     }
 
+    /**
+     * @param  array<string, mixed>  $remoteGeneration
+     */
     private function findGeneration(array $remoteGeneration): ?Generation
     {
         $localId = $remoteGeneration['metadata']['generation_id'] ?? null;

@@ -8,6 +8,9 @@ use Illuminate\Container\Attributes\Config;
 
 class PricingService
 {
+    /**
+     * @param  array{markup_percent: int, rates: array<string, numeric-string>, characters_per_text_token: int, text_token_variance_percent: int, tokens_per_reference_image: int, output_tokens: array<string, array<string, int>>, max_reasoning_tokens: array<string, int>}  $pricing
+     */
     public function __construct(
         #[Config('pixelforge')] private array $pricing,
     ) {}
@@ -17,13 +20,25 @@ class PricingService
         return $this->withMarkup($this->maximumProviderCost($prompt, $size, $quality, $referenceImageCount));
     }
 
+    /**
+     * @param  array<string, int|null>  $usage
+     * @param  array<string, numeric-string>  $rates
+     */
     public function providerCost(array $usage, array $rates): int
     {
-        return collect($rates)->sum(
-            fn (string $dollarsPerMillionTokens, string $tokenType): int => ($usage[$tokenType] ?? 0) * $this->nanodollarsPerToken($dollarsPerMillionTokens)
-        );
+        $cost = 0;
+
+        foreach ($rates as $tokenType => $dollarsPerMillionTokens) {
+            $cost += ($usage[$tokenType] ?? 0) * $this->nanodollarsPerToken($dollarsPerMillionTokens);
+        }
+
+        return $cost;
     }
 
+    /**
+     * @param  array<string, int|null>  $usage
+     * @param  array<string, numeric-string>  $rates
+     */
     public function price(array $usage, array $rates): int
     {
         return $this->withMarkup($this->providerCost($usage, $rates));
@@ -51,6 +66,9 @@ class PricingService
         return intdiv($providerCost * (100 + $this->pricing['markup_percent']), 100);
     }
 
+    /**
+     * @param  numeric-string  $dollarsPerMillionTokens
+     */
     private function nanodollarsPerToken(string $dollarsPerMillionTokens): int
     {
         return (int) bcmul($dollarsPerMillionTokens, '1000');

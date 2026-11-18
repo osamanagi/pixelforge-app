@@ -10,6 +10,9 @@ final readonly class HandlePixelforgeWebhook
 {
     public function __construct(private SyncGenerationWithPixelforge $syncGeneration) {}
 
+    /**
+     * @param  array<string, mixed>  $event
+     */
     public function handle(array $event): void
     {
         DB::transaction(function () use ($event) {
@@ -23,6 +26,9 @@ final readonly class HandlePixelforgeWebhook
         });
     }
 
+    /**
+     * @param  array<string, mixed>  $event
+     */
     private function recordForTheFirstTime(array $event): bool
     {
         return WebhookEvent::query()->insertOrIgnore([

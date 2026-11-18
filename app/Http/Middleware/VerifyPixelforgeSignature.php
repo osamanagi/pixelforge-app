@@ -28,7 +28,7 @@ class VerifyPixelforgeSignature
         $signature = $this->parseSignatureHeader((string) $request->header('Pixelforge-Signature'));
         $timestamp = (string) $signature->get('t')?->first();
 
-        if (! ctype_digit($timestamp) || abs(now()->timestamp - (int) $timestamp) > self::TOLERANCE_SECONDS) {
+        if (! ctype_digit($timestamp) || abs(now()->getTimestamp() - (int) $timestamp) > self::TOLERANCE_SECONDS) {
             return false;
         }
 
@@ -39,6 +39,9 @@ class VerifyPixelforgeSignature
         );
     }
 
+    /**
+     * @return Collection<string, Collection<int, string>>
+     */
     private function parseSignatureHeader(string $header): Collection
     {
         return collect(explode(',', $header))->mapToGroups(function (string $element): array {

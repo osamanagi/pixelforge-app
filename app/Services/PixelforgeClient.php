@@ -22,6 +22,9 @@ class PixelforgeClient
         #[Config('services.pixelforge.api_key')] private string $apiKey,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function createGeneration(Generation $generation): array
     {
         return $this->request()
@@ -36,6 +39,9 @@ class PixelforgeClient
             ->json();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getGeneration(string $pixelforgeId): array
     {
         return $this->request()
