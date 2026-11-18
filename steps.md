@@ -21,8 +21,8 @@
 - [X] Choose the database (MySQL or Postgres); use the same one locally and in production
 
 ### 2. Pixelforge account
-- [ ] Create 2 API keys: local and deployed
-- [ ] Add `PIXELFORGE_KEY` and `PIXELFORGE_WEBHOOK_SECRET` to `.env`, read through `config/services.php`
+- [X] Create 2 API keys: local and prod, and a webhook secret
+- [X] Add `PIXELFORGE_API_KEY_LOCAL`, `PIXELFORGE_API_KEY_PROD`, and `PIXELFORGE_WEBHOOK_SECRET` to `.env`, read through `config/services.php`
 
 ### 3. Database
 - [ ] `generations` table:

@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'pixelforge' => [
+        'api_key_local' => env('PIXELFORGE_API_KEY_LOCAL'),
+        'api_key_prod' => env('PIXELFORGE_API_KEY_PROD'),
+        'webhook_secret' => env('PIXELFORGE_WEBHOOK_SECRET'),
+    ],
+
 ];
