@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Actions;
+
+use App\Enums\GenerationStatus;
+use App\Models\Generation;
+use Illuminate\Support\Facades\DB;
+
+final readonly class MarkGenerationAsFailed
+{
+    public function handle(Generation $generation, array $error): void
+    {
+        DB::transaction(function () use ($generation, $error) {
+            $generation = Generation::query()->lockForUpdate()->findOrFail($generation->getKey());
+
+            if ($generation->status->isFinal()) {
+                return;
+            }
+
+            $generation->forceFill([
+                'status' => GenerationStatus::Failed,
+                'error' => $error,
+                'actual_cost' => 0,
+                'provider_cost' => 0,
+                'completed_at' => now(),
+            ])->save();
+        });
+    }
+}
