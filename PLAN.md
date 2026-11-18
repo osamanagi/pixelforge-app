@@ -73,13 +73,13 @@
 
 ### 8. Polling fallback
 
-- [X] Scheduled command: fetch generations that are still unfinished after about 2 minutes
-- [X] It goes through the same status-update method as the webhook
+- [x] Scheduled command: fetch generations that are still unfinished after about 2 minutes
+- [x] It goes through the same status-update method as the webhook
 
 ### 9. History page
 
-- [ ] Show each generation's status badge, estimated cost, actual cost, image and error
-- [ ] Use Inertia's `usePoll` while any generation is unfinished
+- [X] Show each generation's status badge, estimated cost, actual cost, image and error
+- [X] Use Inertia's `usePoll` while any generation is unfinished
 
 ### 10. Test the failure cases
 

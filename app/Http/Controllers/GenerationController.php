@@ -7,6 +7,8 @@ use App\Enums\GenerationQuality;
 use App\Enums\GenerationSize;
 use App\Http\Requests\EstimateGenerationPriceRequest;
 use App\Http\Requests\StoreGenerationRequest;
+use App\Http\Resources\GenerationResource;
+use App\Models\Generation;
 use App\Services\PricingService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +17,13 @@ use Inertia\Response;
 
 class GenerationController extends Controller
 {
+    public function show(Generation $generation): Response
+    {
+        return Inertia::render('generations/Show', [
+            'generation' => GenerationResource::make($generation),
+        ]);
+    }
+
     public function create(): Response
     {
         return Inertia::render('generations/Create', [
@@ -25,7 +34,7 @@ class GenerationController extends Controller
 
     public function store(StoreGenerationRequest $request, CreateGeneration $createGeneration): RedirectResponse
     {
-        $createGeneration->handle(
+        $generation = $createGeneration->handle(
             $request->user(),
             $request->validated('prompt'),
             $request->enum('size', GenerationSize::class),
@@ -33,9 +42,7 @@ class GenerationController extends Controller
             $request->referenceImages(),
         );
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Generation submitted.')]);
-
-        return to_route('generations.create');
+        return to_route('generations.show', $generation);
     }
 
     public function estimate(EstimateGenerationPriceRequest $request, PricingService $pricing): JsonResponse
