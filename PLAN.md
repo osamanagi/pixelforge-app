@@ -55,24 +55,26 @@
 - [x] Always send an `Idempotency-Key` so a retry never creates a second generation
 
 ### 6. Generate page
-- [X] Form fields: prompt, size, quality, and up to 4 reference URLs
-- [X] Show a live cost estimate before submitting
-- [X] Use a Form Request for validation
-- [X] Save the row first, then send the request to Pixelforge from a queued job
-- [X] A webhook can arrive before the POST returns, so look the row up by `pixelforge_id` or `idempotency_key`
+
+- [x] Form fields: prompt, size, quality, and up to 4 reference URLs
+- [x] Show a live cost estimate before submitting
+- [x] Use a Form Request for validation
+- [x] Save the row first, then send the request to Pixelforge from a queued job
+- [x] A webhook can arrive before the POST returns, so look the row up by `pixelforge_id` or `idempotency_key`
 
 ### 7. Webhook endpoint
-- [X] Exclude the route from CSRF
-- [X] Verify the HMAC on the raw body with `hash_equals`; reject requests older than 300 seconds
-- [X] Insert the event ID; if it already exists, return 200 and stop
-- [X] Update the status in a transaction with a row lock (`lockForUpdate`)
-- [X] Ignore an event that would move the generation backwards (e.g. `processing` arriving after `succeeded`)
-- [X] On `succeeded`, fill in `actual_cost` and `provider_cost`; on `failed`, the cost is 0
+
+- [x] Exclude the route from CSRF
+- [x] Verify the HMAC on the raw body with `hash_equals`; reject requests older than 300 seconds
+- [x] Insert the event ID; if it already exists, return 200 and stop
+- [x] Update the status in a transaction with a row lock (`lockForUpdate`)
+- [x] Ignore an event that would move the generation backwards (e.g. `processing` arriving after `succeeded`)
+- [x] On `succeeded`, fill in `actual_cost` and `provider_cost`; on `failed`, the cost is 0
 
 ### 8. Polling fallback
 
-- [ ] Scheduled command: fetch generations that are still unfinished after about 2 minutes
-- [ ] It goes through the same status-update method as the webhook
+- [X] Scheduled command: fetch generations that are still unfinished after about 2 minutes
+- [X] It goes through the same status-update method as the webhook
 
 ### 9. History page
 
