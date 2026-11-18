@@ -5,10 +5,14 @@ namespace Database\Factories;
 use App\Enums\GenerationQuality;
 use App\Enums\GenerationSize;
 use App\Enums\GenerationStatus;
+use App\Models\Generation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/**
+ * @extends Factory<Generation>
+ */
 class GenerationFactory extends Factory
 {
     public function definition(): array
