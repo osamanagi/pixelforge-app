@@ -4,13 +4,14 @@ namespace App\Actions;
 
 use App\Enums\GenerationStatus;
 use App\Models\Generation;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\DB;
 
 final readonly class MarkGenerationAsFailed
 {
-    public function handle(Generation $generation, array $error): void
+    public function handle(Generation $generation, array $error, ?CarbonInterface $completedAt = null): void
     {
-        DB::transaction(function () use ($generation, $error) {
+        DB::transaction(function () use ($generation, $error, $completedAt) {
             $generation = Generation::query()->lockForUpdate()->findOrFail($generation->getKey());
 
             if ($generation->status->isFinal()) {
@@ -22,7 +23,7 @@ final readonly class MarkGenerationAsFailed
                 'error' => $error,
                 'actual_cost' => 0,
                 'provider_cost' => 0,
-                'completed_at' => now(),
+                'completed_at' => $completedAt ?? now(),
             ])->save();
         });
     }
