@@ -36,13 +36,13 @@
 - [X] `webhook_events` table: `event_id` (unique), `type`, `payload`, `processed_at`
 
 ### 4. PricingService + test
-- [ ] Estimate (an upper limit):
+- [X] Estimate (an upper limit):
   - exact output tokens, based on size and quality
   - 765 tokens per reference image
   - `ceil(chars / 4)` tokens for the prompt text
   - the maximum reasoning tokens for that quality
-- [ ] Actual cost = `usage × rates`
-- [ ] Test against the docs' example: high quality, 1536x1024, 400-character prompt, 2 reference images = **$0.373875**
+- [X] Actual cost = `usage × rates`
+- [X] Test against the docs' example: high quality, 1536x1024, 400-character prompt, 2 reference images = **$0.373875**
 
 ### 5. PixelforgeClient
 - [ ] Use Laravel's `Http::` client with `->retry()`
