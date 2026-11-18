@@ -45,9 +45,9 @@
 - [X] Test against the docs' example: high quality, 1536x1024, 400-character prompt, 2 reference images = **$0.373875**
 
 ### 5. PixelforgeClient
-- [ ] Use Laravel's `Http::` client with `->retry()`
-- [ ] Retry on 503, and on 429 using the `Retry-After` header; cap the number of retries
-- [ ] Always send an `Idempotency-Key` so a retry never creates a second generation
+- [X] Use Laravel's `Http::` client with `->retry()`
+- [X] Retry on 503, and on 429 using the `Retry-After` header; cap the number of retries
+- [X] Always send an `Idempotency-Key` so a retry never creates a second generation
 
 ### 6. Generate page
 - [ ] Form fields: prompt, size, quality, and up to 4 reference URLs
