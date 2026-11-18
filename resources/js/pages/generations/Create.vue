@@ -20,6 +20,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { SIZE_LABELS } from '@/lib/generation';
 import { formatNanodollars } from '@/lib/money';
 import { create } from '@/routes/generations';
 
@@ -28,12 +29,6 @@ const MAX_PROMPT_LENGTH = 4000;
 const MAX_REFERENCE_IMAGES = 4;
 
 const REFERENCE_IMAGE_PLACEHOLDER = 'https://example.com/reference.png';
-
-const SIZE_LABELS: Record<string, string> = {
-    '1024x1024': 'Square',
-    '1536x1024': 'Landscape',
-    '1024x1536': 'Portrait',
-};
 
 defineOptions({
     layout: {

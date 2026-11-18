@@ -37,7 +37,7 @@ it('saves a pending generation with its estimated price and queues the submissio
             'quality' => 'high',
             'reference_images' => ['https://example.com/a.png', '', 'https://example.com/b.png'],
         ])
-        ->assertRedirect(route('generations.create'));
+        ->assertRedirect(route('generations.show', Generation::sole()));
 
     $generation = Generation::sole();
 
