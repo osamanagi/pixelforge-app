@@ -25,7 +25,7 @@
 - [X] Add `PIXELFORGE_API_KEY_LOCAL`, `PIXELFORGE_API_KEY_PROD`, and `PIXELFORGE_WEBHOOK_SECRET` to `.env`, read through `config/services.php`
 
 ### 3. Database
-- [ ] `generations` table:
+- [X] `generations` table:
   - `user_id`
   - `pixelforge_id` (unique)
   - `idempotency_key` (unique)
@@ -33,7 +33,7 @@
   - `status`, `rates` (json), `usage` (json)
   - `estimated_cost`, `actual_cost`, `provider_cost` (bigint nano-USD)
   - `image_url`, `image_url_expires_at`, `error`, `completed_at`
-- [ ] `webhook_events` table: `event_id` (unique), `type`, `payload`, `processed_at`
+- [X] `webhook_events` table: `event_id` (unique), `type`, `payload`, `processed_at`
 
 ### 4. PricingService + test
 - [ ] Estimate (an upper limit):
